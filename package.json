@@ -37,6 +37,7 @@
         "start:prod": "node dist/src/main.js",
         "prod": "npm run prestart:prod && npm run start:prod",
         "lint": "tslint -p tsconfig.json -c tslint.json",
+        "lint:fix": "tslint --fix -p tsconfig.json -c tslint.json",
         "test": "jest --config ./test/jest-e2e.json"
     },
     "dependencies": {
