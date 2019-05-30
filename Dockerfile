@@ -12,6 +12,8 @@ RUN apt-get install -y vim
 
 # http://www.clock.co.uk/blog/a-guide-on-how-to-cache-npm-install-with-docker
 ADD package.json /app/package.json
+ADD package-lock.json /app/package-lock.json
+ADD yarn.lock /app/yarn.lock
 
 WORKDIR /app
 
