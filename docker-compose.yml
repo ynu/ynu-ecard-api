@@ -1,0 +1,18 @@
+version: '2'
+
+# node application for ecard-api
+services:
+    ynu-ecard-api:
+        build: .
+        ports:
+            - '50013:3000'
+        environment:
+            - DATABASE_HOST
+            - DATABASE_PORT
+            - DATABASE_USER
+            - DATABASE_PASSWORD
+            - DATABASE_DATABASE
+            - JWT_PRIVATE_KEY
+            - USERNAME
+            - PASSWORD
+        restart: always
