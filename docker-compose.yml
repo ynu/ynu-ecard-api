@@ -1,11 +1,11 @@
 version: '2'
 
-# node application for ecard-api
+# node application for ynu-ecard-api
 services:
     ynu-ecard-api:
         build: .
         ports:
-            - '50013:3000'
+            - '3000'
         environment:
             - DATABASE_HOST
             - DATABASE_PORT
@@ -15,4 +15,6 @@ services:
             - JWT_PRIVATE_KEY
             - USERNAME
             - PASSWORD
+            - VIRTUAL_HOST=ynu-ecard-api.ynu.edu.cn
+            - NODE_ENV=production
         restart: always
