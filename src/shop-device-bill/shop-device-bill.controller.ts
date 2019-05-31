@@ -16,6 +16,7 @@ import {
     ApiBearerAuth,
     ApiOkResponse,
     ApiImplicitParam,
+    ApiOperation,
 } from '@nestjs/swagger';
 import { ShopDeviceBillService } from './shop-device-bill.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -28,8 +29,8 @@ import { Request } from 'express';
 export class ShopDeviceBillController {
     constructor(private readonly shopDeviceBillService: ShopDeviceBillService) { }
 
-
     @Get('summary')
+    @ApiOperation({ title: '获取概要信息，例如count' })
     @ApiOkResponse({ type: Object })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))

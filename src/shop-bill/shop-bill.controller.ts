@@ -16,6 +16,7 @@ import {
     ApiBearerAuth,
     ApiOkResponse,
     ApiImplicitParam,
+    ApiOperation,
 } from '@nestjs/swagger';
 import { ShopBillService } from './shop-bill.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -30,6 +31,7 @@ export class ShopBillController {
     constructor(private readonly shopBillService: ShopBillService) { }
 
     @Post()
+    @ApiOperation({ title: '根据 ShopBillQueryDto 中的属性组合条件(and)查找' })
     @ApiOkResponse({ type: [ShopBillDto] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -38,6 +40,7 @@ export class ShopBillController {
     }
 
     @Get('summary')
+    @ApiOperation({ title: '获取概要信息，例如count' })
     @ApiOkResponse({ type: Object })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))

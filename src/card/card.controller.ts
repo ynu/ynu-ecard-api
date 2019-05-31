@@ -16,6 +16,7 @@ import {
     ApiBearerAuth,
     ApiOkResponse,
     ApiImplicitParam,
+    ApiOperation,
 } from '@nestjs/swagger';
 import { CardService } from './card.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -30,6 +31,7 @@ export class CardController {
     constructor(private readonly cardService: CardService) { }
 
     @Post()
+    @ApiOperation({ title: '根据 CardQueryDto 中的属性组合条件(or)模糊查找' })
     @ApiOkResponse({ type: [CardDto] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -38,6 +40,7 @@ export class CardController {
     }
 
     @Get('all-ids')
+    @ApiOperation({ title: '获取所有的id' })
     @ApiOkResponse({ type: [String] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -46,6 +49,7 @@ export class CardController {
     }
 
     @Get('summary')
+    @ApiOperation({ title: '获取概要信息，例如count' })
     @ApiOkResponse({ type: Object })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -54,6 +58,7 @@ export class CardController {
     }
 
     @Get(':stuempno')
+    @ApiOperation({ title: '根据id查找单条记录' })
     @ApiOkResponse({ type: CardDto })
     @ApiImplicitParam({ name: 'stuempno', required: true })
     @ApiBearerAuth()

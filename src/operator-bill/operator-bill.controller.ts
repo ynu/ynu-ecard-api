@@ -16,6 +16,7 @@ import {
     ApiBearerAuth,
     ApiOkResponse,
     ApiImplicitParam,
+    ApiOperation,
 } from '@nestjs/swagger';
 import { OperatorBillService } from './operator-bill.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -30,6 +31,7 @@ export class OperatorBillController {
     constructor(private readonly operatorBillService: OperatorBillService) { }
 
     @Post()
+    @ApiOperation({ title: '根据 OperatorBillQueryDto 中的属性组合条件(and)查找' })
     @ApiOkResponse({ type: [OperatorBillDto] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -38,6 +40,7 @@ export class OperatorBillController {
     }
 
     @Get('all-ids')
+    @ApiOperation({ title: '获取所有的id' })
     @ApiOkResponse({ type: [String] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -46,6 +49,7 @@ export class OperatorBillController {
     }
 
     @Get('summary')
+    @ApiOperation({ title: '获取概要信息，例如count' })
     @ApiOkResponse({ type: Object })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -54,6 +58,7 @@ export class OperatorBillController {
     }
 
     @Get(':primarykey')
+    @ApiOperation({ title: '根据id查找单条记录' })
     @ApiOkResponse({ type: OperatorBillDto })
     @ApiImplicitParam({ name: 'primarykey', required: true })
     @ApiBearerAuth()

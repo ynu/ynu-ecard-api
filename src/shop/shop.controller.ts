@@ -16,6 +16,7 @@ import {
     ApiBearerAuth,
     ApiOkResponse,
     ApiImplicitParam,
+    ApiOperation,
 } from '@nestjs/swagger';
 import { ShopService } from './shop.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -29,7 +30,8 @@ import { JwtAuthGuard } from '../auth/jwt-auth-guard';
 export class ShopController {
     constructor(private readonly shopService: ShopService) { }
 
-    @Get('')
+    @Get()
+    @ApiOperation({ title: '查找所有的商户信息' })
     @ApiOkResponse({ type: [ShopDto] })
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
@@ -38,6 +40,7 @@ export class ShopController {
     }
 
     @Get(':shopid/ancestors')
+    @ApiOperation({ title: '逐级查找父级记录，从根节点开始排序' })
     @ApiOkResponse({ type: [ShopDto] })
     @ApiImplicitParam({ name: 'shopid', required: true })
     @ApiBearerAuth()
@@ -47,6 +50,7 @@ export class ShopController {
     }
 
     @Get('all-ids')
+    @ApiOperation({ title: '获取所有的id' })
     @ApiOkResponse({ type: [String] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -55,6 +59,7 @@ export class ShopController {
     }
 
     @Get('summary')
+    @ApiOperation({ title: '获取概要信息，例如count' })
     @ApiOkResponse({ type: Object })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -63,6 +68,7 @@ export class ShopController {
     }
 
     @Get(':shopid')
+    @ApiOperation({ title: '根据id查找单条记录' })
     @ApiOkResponse({ type: ShopDto })
     @ApiImplicitParam({ name: 'shopid', required: true })
     @ApiBearerAuth()

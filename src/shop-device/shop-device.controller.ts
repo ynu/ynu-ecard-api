@@ -16,6 +16,7 @@ import {
     ApiBearerAuth,
     ApiOkResponse,
     ApiImplicitParam,
+    ApiOperation,
 } from '@nestjs/swagger';
 import { ShopDeviceService } from './shop-device.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -29,6 +30,7 @@ export class ShopDeviceController {
     constructor(private readonly shopDeviceService: ShopDeviceService) { }
 
     @Get('all-ids')
+    @ApiOperation({ title: '获取所有的id' })
     @ApiOkResponse({ type: [String] })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -37,6 +39,7 @@ export class ShopDeviceController {
     }
 
     @Get('summary')
+    @ApiOperation({ title: '获取概要信息，例如count' })
     @ApiOkResponse({ type: Object })
     @ApiBearerAuth()
     @UseGuards(AuthGuard('jwt'))
@@ -45,6 +48,7 @@ export class ShopDeviceController {
     }
 
     @Get(':id')
+    @ApiOperation({ title: '根据id查找单条记录' })
     @ApiOkResponse({ type: ShopDeviceDto })
     @ApiImplicitParam({ name: 'id', required: true })
     @ApiBearerAuth()

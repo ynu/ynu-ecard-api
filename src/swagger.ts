@@ -3,7 +3,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 export function setupSwagger(app: INestApplication) {
     const options = new DocumentBuilder()
-        .setTitle('Nest.js example API')
+        .setTitle('Ecard API of YNU')
         .setDescription('API Documentation')
         .setVersion('1.0')
         .addBearerAuth()
