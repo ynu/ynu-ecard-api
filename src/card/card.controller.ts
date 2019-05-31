@@ -21,12 +21,21 @@ import { CardService } from './card.service';
 import { AuthGuard } from '@nestjs/passport';
 import { Card as CardEntity } from './card.entity';
 import { CardDto } from './dto/card.dto';
+import { CardQueryDto } from './dto/card-query.dto';
 import { Request } from 'express';
 
 @Controller('card')
 @ApiUseTags('card')
 export class CardController {
     constructor(private readonly cardService: CardService) { }
+
+    @Post()
+    @ApiOkResponse({ type: [CardDto] })
+    @ApiBearerAuth()
+    @UseGuards(AuthGuard('jwt'))
+    findByCondition(@Body() cardQueryDto: CardQueryDto): Promise<CardDto[]> {
+        return this.cardService.findByCondition(cardQueryDto);
+    }
 
     @Get('all-ids')
     @ApiOkResponse({ type: [String] })

@@ -25,7 +25,7 @@ export class AuthService {
 
     async signToken(): Promise<string> {
         const payload = { username: process.env.USERNAME };
-        const token = sign(payload, this.jwtPrivateKey, {});
+        const token = sign(payload, this.jwtPrivateKey, { noTimestamp: true });
         return token;
     }
 }
